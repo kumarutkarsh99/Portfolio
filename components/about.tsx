@@ -18,7 +18,7 @@ export function About() {
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-16">
-            <p className="text-lg text-slate-700 mb-6 leading-relaxed">
+            <p className="text-lg text-slate-700 mb-6 leading-relaxed text-justify">
               I'm a passionate Full Stack Developer and Computer Science student
               at IIT Bhubaneswar, driven by a love for building scalable web
               platforms and solving complex technical challenges. From
