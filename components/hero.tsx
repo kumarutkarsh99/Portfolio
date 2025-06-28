@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowDown, Mail, FileText } from "lucide-react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export function Hero() {
   const scrollToSection = (sectionId: string) => {
@@ -16,8 +17,12 @@ export function Hero() {
     <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 pt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center">
-          {/* Profile Image */}
-          <div className="mb-8">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="mb-8"
+          >
             <div className="relative w-48 h-48 mx-auto mb-6">
               <Image
                 src="/photo1.jpg"
@@ -27,27 +32,45 @@ export function Hero() {
                 className="rounded-full object-cover shadow-lg"
               />
             </div>
-          </div>
+          </motion.div>
 
-          {/* Name and Title */}
-          <h1 className="text-4xl md:text-6xl font-semibold text-slate-900 mb-4">
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-4xl md:text-6xl font-semibold text-slate-900 mb-4"
+          >
             Kumar Utkarsh
-          </h1>
-          <p className="text-xl md:text-2xl text-slate-600 mb-8 max-w-3xl mx-auto">
-            Full Stack Developer | Coding Enthusiast
-          </p>
+          </motion.h1>
 
-          {/* Description */}
-          <p className="text-lg text-slate-600 mb-12 max-w-3xl mx-auto leading-relaxed">
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="text-xl md:text-2xl text-slate-600 mb-8 max-w-3xl mx-auto"
+          >
+            Full Stack Developer | Coding Enthusiast
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="text-lg text-slate-600 mb-12 max-w-3xl mx-auto leading-relaxed"
+          >
             I'm a Computer Science student at IIT Bhubaneswar with a strong
             foundation in full-stack development and problem-solving. I enjoy
             building modern web applications, working on real-world projects,
             and tackling challenging coding problems. Currently honing my skills
             with a keen interest in creating impactful software solutions.
-          </p>
+          </motion.p>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
+          >
             <Button
               size="lg"
               onClick={() => scrollToSection("projects")}
@@ -65,12 +88,14 @@ export function Hero() {
               <Mail className="mr-2 h-5 w-5" />
               Contact Me
             </Button>
-          </div>
+          </motion.div>
 
-          {/* Scroll Indicator */}
-          <div className="animate-bounce">
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ repeat: Infinity, duration: 1.5 }}
+          >
             <ArrowDown className="mx-auto h-6 w-6 text-slate-400" />
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

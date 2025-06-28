@@ -1,5 +1,8 @@
+"use client";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { motion } from "framer-motion";
 
 const skillCategories = [
   {
@@ -41,11 +44,24 @@ const skillCategories = [
   },
 ];
 
+const container = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.2 } },
+};
+const fadeUp = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } };
+
 export function Skills() {
   return (
     <section id="skills" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <motion.div
+          className="text-center mb-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
             Skills & Technologies
           </h2>
@@ -53,76 +69,101 @@ export function Skills() {
             A snapshot of the languages, frameworks and tools I work with to
             build reliable, scalable software solutions.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {skillCategories.map((category, index) => (
-            <Card
-              key={index}
-              className="border-slate-200 shadow-sm hover:shadow-md transition-shadow duration-200"
+        <motion.div
+          className="grid md:grid-cols-3 gap-8"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={container}
+        >
+          {skillCategories.map((category, idx) => (
+            <motion.div
+              key={idx}
+              variants={fadeUp}
+              transition={{ duration: 0.6 }}
+              whileHover={{
+                scale: 1.01,
+                boxShadow: "0 8px 16px rgba(0,0,0,0.1)",
+                transition: { duration: 0.2 },
+              }}
             >
-              <CardHeader className="text-center">
-                <CardTitle className="text-xl text-slate-900">
-                  {category.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap gap-2 justify-center">
-                  {category.skills.map((skill, skillIndex) => (
-                    <Badge
-                      key={skillIndex}
-                      variant="secondary"
-                      className="bg-slate-100 text-slate-700 hover:bg-slate-200 transition-colors duration-200 cursor-default"
-                    >
-                      {skill}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+              <Card className="border-slate-200 shadow-sm transition-shadow duration-200">
+                <CardHeader className="text-center">
+                  <CardTitle className="text-xl text-slate-900">
+                    {category.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-wrap gap-2 justify-center">
+                    {category.skills.map((skill, i) => (
+                      <Badge
+                        key={i}
+                        variant="secondary"
+                        className="bg-slate-100 text-slate-700 hover:bg-slate-200 transition-colors duration-200 cursor-default"
+                      >
+                        {skill}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        {/* Additional Expertise Section */}
-        <div className="mt-16 text-center">
-          <h3 className="text-2xl font-semibold text-slate-900 mb-8">
+        <motion.div
+          className="mt-16 text-center"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={container}
+        >
+          <motion.h3
+            className="text-2xl font-semibold text-slate-900 mb-8"
+            variants={fadeUp}
+            transition={{ duration: 0.6 }}
+          >
             Additional Expertise
-          </h3>
+          </motion.h3>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="p-6 bg-slate-50 rounded-lg">
-              <h4 className="font-semibold text-slate-900 mb-2">
-                Problem Solving
-              </h4>
-              <p className="text-sm text-slate-600">
-                500+ DSA problems solved across LeetCode, Codeforces, and GFG
-              </p>
-            </div>
-            <div className="p-6 bg-slate-50 rounded-lg">
-              <h4 className="font-semibold text-slate-900 mb-2">
-                Cloud & Deployment
-              </h4>
-              <p className="text-sm text-slate-600">
-                Experience with Vercel and Railway for scalable deployments
-              </p>
-            </div>
-            <div className="p-6 bg-slate-50 rounded-lg">
-              <h4 className="font-semibold text-slate-900 mb-2">
-                Team Collaboration
-              </h4>
-              <p className="text-sm text-slate-600">
-                Hands-on experience with GitHub workflows and agile development
-              </p>
-            </div>
-            <div className="p-6 bg-slate-50 rounded-lg">
-              <h4 className="font-semibold text-slate-900 mb-2">
-                Machine Learning
-              </h4>
-              <p className="text-sm text-slate-600">
-                Developed NLP models for bias detection using BERT and LSTM
-              </p>
-            </div>
+            {[
+              {
+                title: "Problem Solving",
+                desc: "500+ DSA problems solved across LeetCode, Codeforces, and GFG",
+              },
+              {
+                title: "Cloud & Deployment",
+                desc: "Experience with Vercel and Railway for scalable deployments",
+              },
+              {
+                title: "Team Collaboration",
+                desc: "Hands-on experience with GitHub workflows and agile development",
+              },
+              {
+                title: "Machine Learning",
+                desc: "Developed NLP models for bias detection using BERT and LSTM",
+              },
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                className="p-6 bg-slate-50 rounded-lg transition-shadow"
+                variants={fadeUp}
+                transition={{ duration: 0.6 }}
+                whileHover={{
+                  scale: 1.02,
+                  transition: { duration: 0.2 },
+                }}
+              >
+                <h4 className="font-semibold text-slate-900 mb-2">
+                  {item.title}
+                </h4>
+                <p className="text-sm text-slate-600">{item.desc}</p>
+              </motion.div>
+            ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

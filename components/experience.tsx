@@ -1,6 +1,9 @@
+"use client";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, MapPin } from "lucide-react";
+import { motion } from "framer-motion";
 
 const experiences = [
   {
@@ -44,79 +47,109 @@ const experiences = [
   // },
 ];
 
+const container = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.2 } },
+};
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+};
+
 export function Experience() {
   return (
     <section id="experience" className="py-20 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <motion.div
+          className="text-center mb-16"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
             Experience & Achievements
           </h2>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto">
             My professional journey and key accomplishments.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="space-y-8">
-          {experiences.map((exp, index) => (
-            <Card
-              key={index}
-              className="bg-white border-slate-200 shadow-sm hover:shadow-md transition-shadow duration-200"
+        <motion.div
+          className="space-y-8"
+          variants={container}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          {experiences.map((exp, idx) => (
+            <motion.div
+              key={idx}
+              variants={fadeUp}
+              transition={{ duration: 0.6 }}
+              whileHover={{
+                scale: 1.01,
+                boxShadow: "0 8px 16px rgba(0,0,0,0.1)",
+                transition: { duration: 0.2 },
+              }}
             >
-              <CardHeader>
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                  <div>
-                    <CardTitle className="text-xl text-slate-900 mb-2">
-                      {exp.title}
-                    </CardTitle>
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-slate-600">
-                      <span className="font-medium">{exp.company}</span>
-                      <div className="flex items-center gap-4 text-sm">
-                        <div className="flex items-center gap-1">
-                          <MapPin className="h-4 w-4" />
-                          {exp.location}
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Calendar className="h-4 w-4" />
-                          {exp.period}
+              <Card className="bg-white border-slate-200 shadow-sm transition-shadow duration-200">
+                <CardHeader>
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                    <div>
+                      <CardTitle className="text-xl text-slate-900 mb-2">
+                        {exp.title}
+                      </CardTitle>
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-slate-600">
+                        <span className="font-medium">{exp.company}</span>
+                        <div className="flex items-center gap-4 text-sm">
+                          <div className="flex items-center gap-1">
+                            <MapPin className="h-4 w-4" />
+                            {exp.location}
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Calendar className="h-4 w-4" />
+                            {exp.period}
+                          </div>
                         </div>
                       </div>
                     </div>
+                    <Badge
+                      variant="outline"
+                      className="border-slate-300 text-slate-700 w-fit"
+                    >
+                      {exp.period.split(" - ")[1] === "Present"
+                        ? "Current"
+                        : "Previous"}
+                    </Badge>
                   </div>
-                  <Badge
-                    variant="outline"
-                    className="border-slate-300 text-slate-700 w-fit"
-                  >
-                    {exp.period.split(" - ")[1] === "Present"
-                      ? "Current"
-                      : "Previous"}
-                  </Badge>
-                </div>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <p className="text-slate-700 leading-relaxed">
-                  {exp.description}
-                </p>
-                <div>
-                  <h4 className="font-semibold text-slate-900 mb-2">
-                    Key Achievements:
-                  </h4>
-                  <ul className="space-y-1">
-                    {exp.achievements.map((achievement, achIndex) => (
-                      <li
-                        key={achIndex}
-                        className="text-slate-700 text-sm flex items-start"
-                      >
-                        <span className="text-slate-400 mr-2">•</span>
-                        {achievement}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </CardContent>
-            </Card>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <p className="text-slate-700 leading-relaxed">
+                    {exp.description}
+                  </p>
+                  <div>
+                    <h4 className="font-semibold text-slate-900 mb-2">
+                      Key Achievements:
+                    </h4>
+                    <ul className="space-y-1">
+                      {exp.achievements.map((ach, i) => (
+                        <li
+                          key={i}
+                          className="text-slate-700 text-sm flex items-start"
+                        >
+                          <span className="text-slate-400 mr-2">•</span>
+                          {ach}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
