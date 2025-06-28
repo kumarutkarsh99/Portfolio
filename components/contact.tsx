@@ -127,7 +127,7 @@ export function Contact() {
             variants={fadeUp}
             transition={{ duration: 0.6 }}
             whileHover={{
-              scale: 1.02,
+              scale: 1.01,
               boxShadow: "0 8px 16px rgba(0,0,0,0.1)",
               transition: { duration: 0.2 },
             }}
