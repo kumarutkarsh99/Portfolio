@@ -17,6 +17,7 @@ const projects = [
     tech: ["React", "Flask", "Tesseract OCR", "PostgreSQL"],
     liveUrl: "https://lecturelens-frontend.vercel.app/",
     githubUrl: "https://github.com/kumarutkarsh99/lecturelens_frontend",
+    status: "completed",
   },
   {
     title: "BiasFree",
@@ -27,6 +28,18 @@ const projects = [
     tech: ["React", "Flask", "BERT", "LSTM"],
     liveUrl: "https://biasfree-frontend.vercel.app/",
     githubUrl: "https://github.com/kumarutkarsh99/biasfree_frontend",
+    status: "completed",
+  },
+  {
+    title: "ShopCart",
+    headline: "Stock-Aware Shopping Cart",
+    description:
+      "A responsive shopping cart system with stock-aware product management, filtering, and persistent state using localStorage.",
+    image: "/project5.png",
+    tech: ["React", "Material UI", "Context API"],
+    liveUrl: "https://shopping-cart-nu-rose.vercel.app/products",
+    githubUrl: "https://github.com/kumarutkarsh99/Shopping-Cart",
+    status: "completed",
   },
   {
     title: "Applicant Tracking System",
@@ -35,8 +48,20 @@ const projects = [
       "A scalable ATS platform with job posting, client onboarding, file uploads, and LinkedIn profile import, built with React, NestJS, and AWS.",
     image: "/project3.png",
     tech: ["React", "NestJS", "PostgreSQL", "AWS"],
-    liveUrl: "#",
-    githubUrl: "#",
+    liveUrl: "progress",
+    githubUrl: "https://github.com/kumarutkarsh99/admin-panel.git",
+    status: "in-progress",
+  },
+  {
+    title: "Wake Word Detection System",
+    headline: "TinyML",
+    description:
+      "Captures audio, extracts MFCC features, and runs quantized ML inference using TensorFlow Lite for Microcontrollers.",
+    image: "/project4.jpg",
+    tech: ["TensorFlow Lite", "Arduino", "Embedded ML"],
+    liveUrl: "progress",
+    githubUrl: "",
+    status: "in-progress",
   },
 ];
 
@@ -90,13 +115,13 @@ export function Projects() {
               }}
             >
               <Card className="bg-white border-slate-200 shadow-sm transition-shadow duration-300 group">
-                <div className="relative overflow-hidden rounded-t-lg">
+                <div className="h-full relative overflow-hidden rounded-t-lg">
                   <Image
                     src={project.image}
                     alt={project.title}
                     width={300}
                     height={200}
-                    className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-[170px] object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
                 <CardHeader>
@@ -124,14 +149,20 @@ export function Projects() {
                     <Button
                       size="sm"
                       className="bg-slate-700 hover:bg-slate-800 text-white flex-1"
+                      disabled={project.status == "in-progress"}
                       onClick={() => window.open(project.liveUrl, "_blank")}
                     >
-                      <ExternalLink className="mr-2 h-4 w-4" />
-                      Live Demo
+                      {project.status == "completed" && (
+                        <ExternalLink className="mr-2 h-4 w-4" />
+                      )}
+                      {project.status == "in-progress"
+                        ? "In Progress"
+                        : "Live Demo"}
                     </Button>
                     <Button
                       size="sm"
                       variant="outline"
+                      disabled={project.status == "in-progress"}
                       className="border-slate-300 text-slate-700 hover:bg-slate-50 bg-transparent"
                       onClick={() => window.open(project.githubUrl, "_blank")}
                     >
