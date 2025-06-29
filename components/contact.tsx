@@ -123,15 +123,7 @@ export function Contact() {
             </div>
           </motion.div>
 
-          <motion.div
-            variants={fadeUp}
-            transition={{ duration: 0.6 }}
-            whileHover={{
-              scale: 1.01,
-              boxShadow: "0 8px 16px rgba(0,0,0,0.1)",
-              transition: { duration: 0.2 },
-            }}
-          >
+          <motion.div variants={fadeUp} transition={{ duration: 0.6 }}>
             <Card className="border-slate-200 shadow-sm">
               <CardHeader>
                 <CardTitle className="text-xl text-slate-900">
